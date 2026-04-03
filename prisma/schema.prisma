@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Recommendation {
+  id            String   @id @default(cuid())
+  sheetRowId    Int      @default(0)
+  name          String
+  slug          String   @unique
+  description   String   @db.Text
+  whyWeLoveIt   String?  @db.Text
+  category      String
+  priceRange    String?
+  travelerTags  String[]
+  neighborhood  String?
+  address       String?
+  latitude      Float?
+  longitude     Float?
+  googleMapsUrl String?
+  phone         String?
+  website       String?
+  instagram     String?
+  imageUrl      String?
+  imageGallery  String[]
+  seasonalPick  Boolean  @default(false)
+  seasonalLabel String?
+  active        Boolean  @default(true)
+  sortOrder     Int      @default(999)
+  extraFields   Json?
+  favorites     Favorite[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([category])
+  @@index([active])
+  @@index([seasonalPick])
+  @@index([category, active])
+}
+
+model CategoryIntro {
+  id        String   @id @default(cuid())
+  category  String   @unique
+  introText String   @db.Text
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id            String     @id @default(cuid())
+  email         String     @unique
+  passwordHash  String
+  gdprConsentAt DateTime
+  favorites     Favorite[]
+  createdAt     DateTime   @default(now())
+}
+
+model Favorite {
+  id               String         @id @default(cuid())
+  userId           String
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recommendationId String
+  recommendation   Recommendation @relation(fields: [recommendationId], references: [id], onDelete: Cascade)
+  createdAt        DateTime       @default(now())
+
+  @@unique([userId, recommendationId])
+  @@index([userId])
+}
+
+model SyncLog {
+  id           String   @id @default(cuid())
+  syncedAt     DateTime @default(now())
+  rowsUpdated  Int
+  status       String
+  errorMessage String?  @db.Text
+  durationMs   Int?
+}
