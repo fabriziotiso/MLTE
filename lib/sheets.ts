@@ -90,13 +90,14 @@ export function parseSheetData(
   rows: string[][],
   category: string
 ): { items: SheetRow[]; introText: string | null } {
-  if (!rows || rows.length < 4) return { items: [], introText: null }
+  if (!rows || rows.length < 5) return { items: [], introText: null }
 
-  // Row 0: column headers (actual field names)
-  // Row 1: descriptions
-  // Row 2: REQUIRED flags
-  // Row 3+: data rows
-  const headers = rows[0].map(h => h.toString().trim())
+  // Row 0: title (skip)
+  // Row 1: column headers (actual field names, may have ' *' suffix)
+  // Row 2: descriptions
+  // Row 3: REQUIRED flags
+  // Row 4+: data rows
+  const headers = rows[1].map(h => h.toString().trim().replace(/\s*\*$/, ''))
 
   // Build column index map
   const colIdx: Record<string, number> = {}
@@ -112,7 +113,7 @@ export function parseSheetData(
   const items: SheetRow[] = []
   let introText: string | null = null
 
-  for (let r = 3; r < rows.length; r++) {
+  for (let r = 4; r < rows.length; r++) {
     const row = rows[r]
     if (!row || row.length === 0) continue
 
