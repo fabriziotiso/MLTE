@@ -1,13 +1,8 @@
 [build]
-builder = "nixpacks"
-buildCommand = "npm run build"
+builder = "dockerfile"
 
 [deploy]
-startCommand = "node -e \"require('./lib/sync-on-start')\" && npm start"
 healthcheckPath = "/api/categories"
-healthcheckTimeout = 30
+healthcheckTimeout = 60
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
-
-[environments.production]
-NODE_ENV = "production"
