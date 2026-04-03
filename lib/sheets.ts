@@ -34,13 +34,12 @@ const COMMON_COLUMNS = [
 ]
 
 export function getGoogleSheetsClient() {
-  const privateKeyBase64 = process.env.GOOGLE_PRIVATE_KEY!
-  const privateKey = Buffer.from(privateKeyBase64, 'base64').toString('utf-8')
+  const keyJson = JSON.parse(Buffer.from(process.env.GOOGLE_PRIVATE_KEY!, 'base64').toString('utf-8'))
 
   const auth = new google.auth.GoogleAuth({
     credentials: {
-      client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      private_key: privateKey,
+      client_email: keyJson.client_email,
+      private_key: keyJson.private_key,
     },
     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
   })
