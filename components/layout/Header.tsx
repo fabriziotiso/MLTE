@@ -13,12 +13,17 @@ export default function Header({
 }: HeaderProps) {
   return (
     <header
-      className={`sticky top-0 z-40 flex items-center h-14 px-4 ${
+      className={`sticky top-0 z-40 flex items-center px-4 ${
         transparent
           ? 'bg-transparent'
           : 'bg-cream/90 backdrop-blur-md border-b border-sand/60'
       }`}
-      style={{ paddingTop: 'env(safe-area-inset-top)' }}
+      style={{ 
+        height: 'calc(3.5rem + env(safe-area-inset-top))',
+        paddingTop: 'env(safe-area-inset-top)',
+        display: 'flex',
+        alignItems: 'center'
+      }}
     >
       <Link href="/" className="flex items-center gap-1.5 mr-auto">
         <div className="w-7 h-7 rounded-lg bg-forest flex items-center justify-center">

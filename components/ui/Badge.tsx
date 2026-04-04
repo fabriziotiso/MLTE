@@ -12,7 +12,6 @@ export default function Badge({ text, variant = 'tag', category, className = '' 
     const meta = CATEGORY_META[category]
     return (
       <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-forest/10 text-forest ${className}`}>
-        <span>{meta?.icon ?? '📍'}</span>
         {meta?.label ?? text}
       </span>
     )
