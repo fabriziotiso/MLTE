@@ -81,6 +81,15 @@ function parseBool(val: string): boolean {
   return ['yes', 'true', '1'].includes(val.toLowerCase())
 }
 
+// Convert Google Drive share/view URLs to direct image URLs
+function toDirectImageUrl(url: string): string {
+  if (!url) return url
+  // https://drive.google.com/file/d/FILE_ID/view?... → https://lh3.googleusercontent.com/d/FILE_ID
+  const match = url.match(/drive\.google\.com\/file\/d\/([^/]+)/)
+  if (match) return `https://lh3.googleusercontent.com/d/${match[1]}`
+  return url
+}
+
 function parseNumber(val: string, fallback: number): number {
   const n = parseFloat(val)
   return isNaN(n) ? fallback : n
@@ -166,8 +175,8 @@ export function parseSheetData(
       phone: get(row, 'phone') || null,
       website: get(row, 'website') || null,
       instagram: get(row, 'instagram') || null,
-      imageUrl: get(row, 'image_url') || null,
-      imageGallery,
+      imageUrl: toDirectImageUrl(get(row, 'image_url')) || null,
+      imageGallery: imageGallery.map(toDirectImageUrl),
       seasonalPick: parseBool(get(row, 'seasonal_pick')),
       seasonalLabel: get(row, 'seasonal_label') || null,
       active: get(row, 'active').toLowerCase() !== 'no',
