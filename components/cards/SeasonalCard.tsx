@@ -41,7 +41,7 @@ export default function SeasonalCard({ item }: SeasonalCardProps) {
           <span className="ml-auto text-xl">{meta?.icon}</span>
         </div>
 
-        <div>
+        <div className="bg-navy/80 rounded-xl px-3 py-2.5 backdrop-blur-sm">
           <p className="text-cream/70 text-xs mb-0.5 font-medium tracking-wide uppercase">
             {meta?.label}
           </p>
