@@ -11,7 +11,7 @@ export default function SeasonalCarousel({ items }: SeasonalCarouselProps) {
   return (
     <section className="mb-8">
       <div className="px-4 mb-3">
-        <h2 className="font-heading text-navy text-2xl">
+        <h2 className="text-base font-bold text-navy">
           Seasonal Picks
         </h2>
       </div>

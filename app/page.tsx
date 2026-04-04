@@ -1,5 +1,5 @@
+import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
-import Header from '@/components/layout/Header'
 import SeasonalCarousel from '@/components/home/SeasonalCarousel'
 import CategoryGrid from '@/components/home/CategoryGrid'
 import type { Recommendation } from '@/lib/types'
@@ -37,23 +37,43 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen bg-cream">
-      {/* Hero header */}
-      <div className="relative bg-gradient-to-b from-forest to-forest-dark px-4 pt-12 pb-10">
-        <div style={{ paddingTop: 'env(safe-area-inset-top)' }} />
-        <p className="text-terra-light text-xs font-semibold tracking-widest uppercase mb-2">
-          Marbella Life Tour Experience
-        </p>
-        <h1 className="font-heading text-cream text-4xl leading-tight mb-2">
-          Your Curated<br />Marbella Guide
+      {/* Hero — illustration + wordmark */}
+      <div className="bg-cream px-6 pt-10 pb-0" style={{ paddingTop: 'max(2.5rem, env(safe-area-inset-top))' }}>
+        <div className="flex items-center gap-6">
+          <div className="flex-shrink-0">
+            <Image
+              src="/images/generated-1775333470233.png"
+              alt="MLTE illustration"
+              width={110}
+              height={100}
+              className="object-contain"
+              priority
+            />
+          </div>
+          <div className="flex flex-col gap-0.5 pt-3">
+            <p className="text-[26px] font-bold text-navy leading-tight tracking-[1px]">
+              MARBELLA LIFE
+            </p>
+            <p className="text-[12px] font-semibold text-terra tracking-[3px] uppercase">
+              TOUR EXPERIENCE
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="h-px bg-[#EEEEEE] mx-6 mt-6" />
+
+      {/* Headline */}
+      <div className="px-5 pt-5 pb-2">
+        <h1 className="text-[28px] font-bold text-navy leading-[1.2]">
+          Curated Local Picks<br />for You
         </h1>
       </div>
 
-      {/* Wave separator */}
-      <div className="h-6 bg-gradient-to-b from-forest-dark to-cream" />
-
       <div className="pb-8">
         {/* Seasonal Picks */}
-        <div className="pt-6">
+        <div className="pt-4">
           <SeasonalCarousel items={seasonalPicks} />
         </div>
 
@@ -61,14 +81,14 @@ export default async function HomePage() {
         <CategoryGrid />
 
         {/* Footer */}
-        <footer className="mt-12 px-4 text-center space-y-1">
-          <p className="text-xs text-navy/30">
+        <footer className="mt-10 px-4 text-center space-y-2">
+          <p className="text-[10px] text-[#999999]">
             Curated by the MLTE team · Marbella, Spain
           </p>
-          <div className="flex items-center justify-center gap-3 text-xs text-navy/40">
-            <a href="/privacy" className="hover:text-navy/60 transition-colors">Privacy Policy</a>
-            <span>·</span>
-            <a href="/bug-report" className="hover:text-navy/60 transition-colors">Report a bug</a>
+          <div className="flex items-center justify-center gap-3 text-[10px] text-[#999999]">
+            <a href="/privacy" className="hover:text-[#666666] transition-colors">Privacy Policy</a>
+            <span className="text-[#CCCCCC]">·</span>
+            <a href="/bug-report" className="hover:text-[#666666] transition-colors">Report a bug</a>
           </div>
         </footer>
       </div>

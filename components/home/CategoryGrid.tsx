@@ -1,28 +1,28 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { CATEGORY_META, CATEGORY_TO_PATH } from '@/lib/types'
 
-// Category image placeholders — CEO will update with real photography
 const CATEGORY_IMAGES: Record<string, string> = {
-  restaurant: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80',
-  bar: 'https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=400&q=80',
-  rooftop: 'https://images.unsplash.com/photo-1469041797191-50ace28483c3?w=400&q=80',
-  club: 'https://images.unsplash.com/photo-1566737236500-c8ac43014a67?w=400&q=80',
-  sports: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=400&q=80',
-  cultural: 'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=400&q=80',
-  kids: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&q=80',
-  'beach-club': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=80',
+  restaurant: '/images/generated-1775333765764.png',
+  bar: '/images/generated-1775333779807.png',
+  rooftop: '/images/generated-1775333984949.png',
+  club: '/images/generated-1775333834587.png',
+  sports: '/images/generated-1775333858431.png',
+  cultural: '/images/generated-1775343070120.png',
+  kids: '/images/generated-1775333917255.png',
+  'beach-club': '/images/generated-1775333929985.png',
 }
 
 export default function CategoryGrid() {
   const categories = Object.entries(CATEGORY_META)
 
   return (
-    <section className="px-4">
-      <h2 className="font-heading text-navy text-2xl mb-4">
+    <section className="px-5 pt-2">
+      <h2 className="text-base font-bold text-navy mb-3">
         Explore Marbella
       </h2>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-[10px]">
         {categories.map(([slug, meta]) => {
           const pathSlug = CATEGORY_TO_PATH[slug] ?? slug
           const imgSrc = CATEGORY_IMAGES[slug]
@@ -31,30 +31,27 @@ export default function CategoryGrid() {
             <Link
               key={slug}
               href={`/${pathSlug}`}
-              className="group relative rounded-2xl overflow-hidden aspect-[4/3] shadow-card active:scale-[0.97] transition-transform"
+              className="group relative h-[140px] rounded-[14px] overflow-hidden shadow-card active:scale-[0.97] transition-transform"
             >
-              {/* Background image */}
               {imgSrc && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
+                <Image
                   src={imgSrc}
                   alt={meta.label}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 50vw, 200px"
                   loading="lazy"
                 />
               )}
 
               {/* Gradient overlay */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${meta.bgColor}`} />
-              <div className="absolute inset-0 bg-gradient-card" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
-              {/* Content */}
-              <div className="absolute inset-0 flex flex-col justify-end p-3">
-                <div className="bg-navy/80 rounded-xl px-3 py-2 backdrop-blur-sm inline-block">
-                  <span className="font-heading text-cream text-base font-medium leading-tight">
-                    {meta.label}
-                  </span>
-                </div>
+              {/* Label */}
+              <div className="absolute bottom-0 left-0 right-0 px-3 pb-3">
+                <span className="text-[13px] font-semibold text-white leading-tight">
+                  {meta.label}
+                </span>
               </div>
             </Link>
           )

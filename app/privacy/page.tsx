@@ -4,13 +4,12 @@ import { ChevronLeft } from 'lucide-react'
 export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-cream">
-      <div className="bg-navy px-4 pt-4 pb-8">
-        <div style={{ paddingTop: 'env(safe-area-inset-top)' }} />
-        <Link href="/" className="flex items-center gap-1 text-cream/60 text-sm mb-4 w-fit">
+      <div className="bg-cream px-5 pb-5" style={{ paddingTop: 'max(1.25rem, env(safe-area-inset-top))' }}>
+        <Link href="/" className="flex items-center gap-1.5 text-navy hover:text-navy/70 text-[14px] mb-4 w-fit">
           <ChevronLeft size={16} /> Home
         </Link>
-        <h1 className="font-heading text-cream text-3xl">Privacy Policy</h1>
-        <p className="text-cream/50 text-sm mt-1">Last updated: April 2026</p>
+        <h1 className="text-[24px] font-bold text-navy">Privacy Policy</h1>
+        <p className="text-[#888888] text-[13px] mt-0.5">Last updated: April 2026</p>
       </div>
 
       <div className="px-4 py-6 pb-12 max-w-2xl mx-auto space-y-6 text-navy/80 text-sm leading-relaxed">

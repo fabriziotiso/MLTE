@@ -38,19 +38,19 @@ export default function SearchInput() {
     <div className="relative mx-4 mb-3">
       <Search
         size={16}
-        className="absolute left-3.5 top-1/2 -translate-y-1/2 text-navy/40 pointer-events-none"
+        className="absolute left-4 top-1/2 -translate-y-1/2 text-[#AAAAAA] pointer-events-none"
       />
       <input
         type="search"
         placeholder="Search by name or description…"
         value={value}
         onChange={handleChange}
-        className="w-full pl-9 pr-9 py-2.5 bg-white rounded-xl border border-sand text-sm text-navy placeholder:text-navy/40 focus:outline-none focus:border-forest/40 focus:ring-1 focus:ring-forest/20 transition-all"
+        className="w-full h-11 pl-10 pr-10 bg-white rounded-full border border-[#E8E4DE] text-[13px] text-navy placeholder:text-[#BBBBBB] focus:outline-none focus:border-navy/30 focus:ring-1 focus:ring-navy/10 transition-all"
       />
       {value && (
         <button
           onClick={clear}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-navy/40 hover:text-navy/70"
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-[#AAAAAA] hover:text-navy/70"
         >
           <X size={14} />
         </button>

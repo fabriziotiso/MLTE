@@ -4,13 +4,19 @@ interface WhyWeLoveItProps {
 
 export default function WhyWeLoveIt({ text }: WhyWeLoveItProps) {
   return (
-    <div className="mx-4 mb-5 bg-terra/5 rounded-2xl p-4 border-l-4 border-terra">
-      <p className="text-xs font-bold text-terra uppercase tracking-widest mb-2">
-        Why we love it
-      </p>
-      <p className="font-heading text-navy text-xl leading-snug italic">
-        &ldquo;{text}&rdquo;
-      </p>
+    <div className="mx-4 mb-5 flex gap-3">
+      {/* Orange accent bar */}
+      <div className="w-[3px] h-20 bg-terra rounded-sm flex-shrink-0 mt-0.5" />
+
+      {/* Content */}
+      <div className="flex flex-col gap-1.5">
+        <p className="text-[9px] font-bold text-terra uppercase tracking-[1.5px]">
+          WHY WE LOVE IT
+        </p>
+        <p className="text-[15px] italic text-navy leading-[1.55]">
+          &ldquo;{text}&rdquo;
+        </p>
+      </div>
     </div>
   )
 }

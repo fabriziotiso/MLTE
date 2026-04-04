@@ -18,7 +18,7 @@ export default function BottomNav() {
       className="bg-white border-t border-sand shrink-0"
       style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
     >
-      <div className="flex items-center justify-around h-16 max-w-lg mx-auto px-4">
+      <div className="flex items-center justify-around h-[72px] max-w-lg mx-auto px-8">
         {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
           const isActive =
             href === '/' ? pathname === '/' : pathname.startsWith(href)
@@ -27,23 +27,16 @@ export default function BottomNav() {
             <Link
               key={href}
               href={href}
-              className={`flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all min-w-[3rem] ${
-                isActive
-                  ? 'text-forest'
-                  : 'text-navy/40 hover:text-navy/70'
-              }`}
+              className="flex flex-col items-center gap-1 py-1 w-[60px] transition-all"
             >
               <Icon
-                size={22}
+                size={24}
                 strokeWidth={isActive ? 2.5 : 1.75}
-                className={isActive ? 'text-forest' : ''}
+                className={isActive ? 'text-navy' : 'text-[#AAAAAA]'}
               />
-              <span className={`text-[10px] font-medium tracking-wide ${isActive ? 'text-forest' : ''}`}>
+              <span className={`text-[10px] tracking-wide ${isActive ? 'text-navy font-semibold' : 'text-[#AAAAAA] font-medium'}`}>
                 {label}
               </span>
-              {isActive && (
-                <span className="absolute bottom-0 w-6 h-0.5 bg-forest rounded-full" />
-              )}
             </Link>
           )
         })}

@@ -1,21 +1,15 @@
 import type { Metadata, Viewport } from 'next'
-import { DM_Serif_Display, Inter } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import BottomNav from '@/components/layout/BottomNav'
 import CookieConsent from '@/components/layout/CookieConsent'
 import SessionProvider from '@/components/auth/SessionProvider'
 import { auth } from '@/lib/auth'
 
-const dmSerif = DM_Serif_Display({
-  variable: '--font-dm-serif',
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-})
-
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
 })
 
@@ -35,7 +29,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: '#FFFBF5',
+  themeColor: '#FAFAF8',
   viewportFit: 'cover',
   colorScheme: 'light dark',
 }
@@ -44,7 +38,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const session = await auth()
 
   return (
-    <html lang="en" className={`${dmSerif.variable} ${inter.variable} h-full`}>
+    <html lang="en" className={`${inter.variable} h-full`}>
       <body className="bg-cream text-navy font-body flex flex-col" style={{ height: '100dvh', overflow: 'hidden' }}>
         <SessionProvider session={session}>
           <main className="flex-1 overflow-y-auto pb-4" style={{ WebkitOverflowScrolling: 'touch' } as React.CSSProperties}>

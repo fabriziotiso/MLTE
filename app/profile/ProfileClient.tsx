@@ -36,22 +36,21 @@ export default function ProfileClient({ email }: ProfileClientProps) {
 
   return (
     <div className="min-h-screen bg-cream">
-      <div className="bg-navy px-4 pt-4 pb-8">
-        <div style={{ paddingTop: 'env(safe-area-inset-top)' }} />
+      <div className="bg-cream px-5 pb-5" style={{ paddingTop: 'max(1.25rem, env(safe-area-inset-top))' }}>
         <Link
           href="/"
-          className="flex items-center gap-1 text-cream/60 hover:text-cream/90 text-sm mb-4 transition-colors w-fit"
+          className="flex items-center gap-1.5 text-navy hover:text-navy/70 text-[14px] mb-4 transition-colors w-fit"
         >
           <ChevronLeft size={16} />
           Home
         </Link>
         <div className="flex items-center gap-3">
-          <div className="w-14 h-14 rounded-2xl bg-forest/40 flex items-center justify-center">
-            <User size={28} className="text-cream" />
+          <div className="w-14 h-14 rounded-2xl bg-forest/10 flex items-center justify-center">
+            <User size={28} className="text-navy" />
           </div>
           <div>
-            <h1 className="font-heading text-cream text-2xl">Profile</h1>
-            <p className="text-cream/50 text-sm">{email}</p>
+            <h1 className="text-[24px] font-bold text-navy">Profile</h1>
+            <p className="text-[#888888] text-[13px]">{email}</p>
           </div>
         </div>
       </div>

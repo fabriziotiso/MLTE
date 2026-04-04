@@ -7,8 +7,23 @@ import CEOIntro from '@/components/category/CEOIntro'
 import FilterBar from '@/components/category/FilterBar'
 import SearchInput from '@/components/category/SearchInput'
 import RecommendationGrid from '@/components/category/RecommendationGrid'
-import { ChevronLeft } from 'lucide-react'
+import {
+  ChevronLeft, UtensilsCrossed, Wine, Building2, Music2,
+  Sailboat, Landmark, FerrisWheel, Waves,
+} from 'lucide-react'
 import Link from 'next/link'
+import type { LucideIcon } from 'lucide-react'
+
+const CATEGORY_ICONS: Record<string, LucideIcon> = {
+  restaurant: UtensilsCrossed,
+  bar: Wine,
+  rooftop: Building2,
+  club: Music2,
+  sports: Sailboat,
+  cultural: Landmark,
+  kids: FerrisWheel,
+  'beach-club': Waves,
+}
 
 export const dynamic = 'force-dynamic'
 
@@ -34,6 +49,7 @@ export default async function CategoryPage({ params, searchParams }: PageParams)
   if (!dbCategory) notFound()
 
   const meta = CATEGORY_META[dbCategory]
+  const CategoryIcon = CATEGORY_ICONS[dbCategory] ?? UtensilsCrossed
 
   // Build filters
   const travelerTags = Array.isArray(sp.travelerTag)
@@ -77,21 +93,25 @@ export default async function CategoryPage({ params, searchParams }: PageParams)
 
   return (
     <div className="min-h-screen bg-cream">
-      {/* Category hero */}
-      <div className="relative bg-navy px-4 pt-4 pb-8">
-        <div style={{ paddingTop: 'env(safe-area-inset-top)' }} />
-        <Link
-          href="/"
-          className="flex items-center gap-1 text-cream/60 hover:text-cream/90 text-sm mb-4 transition-colors w-fit"
-        >
-          <ChevronLeft size={16} />
-          Home
-        </Link>
-        <div className="flex items-center gap-3">
-          <span className="text-4xl">{meta.icon}</span>
-          <div>
-            <h1 className="font-heading text-cream text-3xl">{meta.label}</h1>
-            <p className="text-cream/50 text-sm">
+      {/* Category header — light background */}
+      <div className="bg-cream px-5" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
+        {/* Back button row */}
+        <div className="flex items-center gap-1.5 h-[50px]">
+          <Link
+            href="/"
+            className="flex items-center gap-1.5 text-navy hover:text-navy/70 transition-colors"
+          >
+            <ChevronLeft size={20} strokeWidth={2} />
+            <span className="text-[14px] text-navy">Home</span>
+          </Link>
+        </div>
+
+        {/* Title row */}
+        <div className="flex items-center gap-3 pb-5">
+          <CategoryIcon size={32} className="text-navy flex-shrink-0" strokeWidth={1.75} />
+          <div className="flex flex-col gap-0.5">
+            <h1 className="text-[24px] font-bold text-navy leading-none">{meta.label}</h1>
+            <p className="text-[13px] text-[#888888]">
               {items.length} place{items.length !== 1 ? 's' : ''}
             </p>
           </div>
@@ -100,7 +120,7 @@ export default async function CategoryPage({ params, searchParams }: PageParams)
 
       {/* CEO Intro */}
       {intro && (
-        <div className="pt-5">
+        <div className="pt-2">
           <CEOIntro text={intro.introText} categoryIcon={meta.icon} />
         </div>
       )}

@@ -35,11 +35,10 @@ export default function FavoritesClient() {
 
   return (
     <div className="min-h-screen bg-cream">
-      <div className="bg-navy px-4 pt-4 pb-8">
-        <div style={{ paddingTop: 'env(safe-area-inset-top)' }} />
+      <div className="bg-cream px-5 pb-5" style={{ paddingTop: 'max(1.25rem, env(safe-area-inset-top))' }}>
         <div className="flex items-center gap-3">
-          <Heart size={28} className="text-terra" fill="currentColor" />
-          <h1 className="font-heading text-cream text-3xl">Saved Places</h1>
+          <Heart size={28} className="text-navy" fill="currentColor" />
+          <h1 className="text-[24px] font-bold text-navy">Saved Places</h1>
         </div>
       </div>
 

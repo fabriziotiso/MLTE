@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { MapPin } from 'lucide-react'
+import { MapPin, Heart } from 'lucide-react'
 import type { Recommendation } from '@/lib/types'
-import { CATEGORY_META, CATEGORY_TO_PATH } from '@/lib/types'
-import Badge from '@/components/ui/Badge'
+import { CATEGORY_META } from '@/lib/types'
 import FavoriteButton from '@/components/favorites/FavoriteButton'
 
 interface RecommendationCardProps {
@@ -18,16 +17,15 @@ export default function RecommendationCard({
   showCategory = true,
 }: RecommendationCardProps) {
   const meta = CATEGORY_META[item.category]
-  const categoryPath = CATEGORY_TO_PATH[item.category] ?? item.category
   const href = `/r/${item.slug}`
 
   return (
     <Link
       href={href}
-      className="group block bg-white rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 active:scale-[0.98]"
+      className="group block bg-white rounded-2xl overflow-hidden shadow-[0_4px_12px_rgba(0,0,0,0.07)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.12)] transition-all duration-300 active:scale-[0.98]"
     >
-      {/* Image */}
-      <div className="relative aspect-[4/3] bg-sand overflow-hidden">
+      {/* Image — fixed 200px height */}
+      <div className="relative h-[200px] overflow-hidden rounded-t-2xl bg-sand">
         {item.imageUrl ? (
           <Image
             src={item.imageUrl}
@@ -40,53 +38,35 @@ export default function RecommendationCard({
           <div className={`absolute inset-0 bg-gradient-to-br ${meta?.bgColor ?? 'from-navy/40 to-navy/20'}`} />
         )}
 
-        {/* Seasonal label */}
-        {item.seasonalPick && item.seasonalLabel && (
-          <div className="absolute top-2 left-2">
-            <Badge text={item.seasonalLabel} variant="seasonal" />
-          </div>
-        )}
-
-        {/* Favorite button */}
-        {showFavorite && (
-          <div className="absolute top-2 right-2">
+        {/* Heart button — top right */}
+        {showFavorite ? (
+          <div className="absolute top-3 right-3">
             <FavoriteButton recommendationId={item.id} slug={item.slug} />
+          </div>
+        ) : (
+          <div className="absolute top-3 right-3 w-[34px] h-[34px] bg-white rounded-full shadow-[0_2px_6px_rgba(0,0,0,0.12)] flex items-center justify-center">
+            <Heart size={16} className="text-[#CCCCCC]" />
           </div>
         )}
       </div>
 
       {/* Content */}
-      <div className="p-3.5">
-        {showCategory && (
-          <div className="flex items-center gap-1.5 mb-1.5">
-            <Badge text={meta?.label ?? item.category} variant="category" category={item.category} />
-            {item.priceRange && (
-              <Badge text={item.priceRange} variant="price" />
-            )}
-          </div>
-        )}
-        {!showCategory && item.priceRange && (
-          <div className="flex items-center gap-1.5 mb-1.5">
-            <Badge text={item.priceRange} variant="price" />
-          </div>
+      <div className="px-4 pt-[14px] pb-4 flex flex-col gap-[5px]">
+        {/* Price */}
+        {item.priceRange && (
+          <p className="text-[13px] text-[#AAAAAA]">{item.priceRange}</p>
         )}
 
-        <h3 className="font-heading text-navy font-medium text-lg leading-snug line-clamp-1">
+        {/* Name */}
+        <h3 className="text-[17px] font-bold text-navy leading-snug line-clamp-1">
           {item.name}
         </h3>
 
+        {/* Location */}
         {item.neighborhood && (
-          <p className="flex items-center gap-0.5 text-xs text-navy/50 mt-0.5 mb-2">
-            <MapPin size={10} strokeWidth={2} />
-            {item.neighborhood}
-          </p>
-        )}
-
-        {item.travelerTags.length > 0 && (
-          <div className="flex flex-wrap gap-1 mt-2">
-            {item.travelerTags.slice(0, 3).map(tag => (
-              <Badge key={tag} text={tag} variant="tag" />
-            ))}
+          <div className="flex items-center gap-1">
+            <MapPin size={12} className="text-terra flex-shrink-0" strokeWidth={2} />
+            <span className="text-xs text-[#888888] line-clamp-1">{item.neighborhood}</span>
           </div>
         )}
       </div>
