@@ -35,9 +35,7 @@ export default function RecommendationCard({
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         ) : (
-          <div className={`absolute inset-0 bg-gradient-to-br ${meta?.bgColor ?? 'from-navy/40 to-navy/20'} flex items-center justify-center`}>
-            <span className="text-4xl opacity-60">{meta?.icon ?? '📍'}</span>
-          </div>
+          <div className={`absolute inset-0 bg-gradient-to-br ${meta?.bgColor ?? 'from-navy/40 to-navy/20'}`} />
         )}
 
         {/* Seasonal label */}
