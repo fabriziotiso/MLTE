@@ -9,11 +9,13 @@ import FavoriteButton from '@/components/favorites/FavoriteButton'
 interface RecommendationCardProps {
   item: Recommendation
   showFavorite?: boolean
+  showCategory?: boolean
 }
 
 export default function RecommendationCard({
   item,
   showFavorite = true,
+  showCategory = true,
 }: RecommendationCardProps) {
   const meta = CATEGORY_META[item.category]
   const categoryPath = CATEGORY_TO_PATH[item.category] ?? item.category
@@ -55,12 +57,19 @@ export default function RecommendationCard({
 
       {/* Content */}
       <div className="p-3.5">
-        <div className="flex items-center gap-1.5 mb-1.5">
-          <Badge text={meta?.label ?? item.category} variant="category" category={item.category} />
-          {item.priceRange && (
+        {showCategory && (
+          <div className="flex items-center gap-1.5 mb-1.5">
+            <Badge text={meta?.label ?? item.category} variant="category" category={item.category} />
+            {item.priceRange && (
+              <Badge text={item.priceRange} variant="price" />
+            )}
+          </div>
+        )}
+        {!showCategory && item.priceRange && (
+          <div className="flex items-center gap-1.5 mb-1.5">
             <Badge text={item.priceRange} variant="price" />
-          )}
-        </div>
+          </div>
+        )}
 
         <h3 className="font-heading text-navy font-medium text-lg leading-snug line-clamp-1">
           {item.name}

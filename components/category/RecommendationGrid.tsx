@@ -15,7 +15,7 @@ export default function RecommendationGrid({ items, hasFilters }: Recommendation
   return (
     <div className="px-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
       {items.map(item => (
-        <RecommendationCard key={item.id} item={item} />
+        <RecommendationCard key={item.id} item={item} showCategory={false} />
       ))}
     </div>
   )
