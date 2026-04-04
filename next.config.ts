@@ -8,7 +8,6 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'drive.google.com',
-        pathname: '/uc**',
       },
       // lh3.googleusercontent.com (Google Drive CDN)
       {

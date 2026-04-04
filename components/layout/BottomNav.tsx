@@ -15,8 +15,15 @@ export default function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-sand"
-      style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+      className="bg-white border-t border-sand"
+      style={{
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        zIndex: 9999,
+        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+      }}
     >
       <div className="flex items-center justify-around h-16 max-w-lg mx-auto px-4">
         {NAV_ITEMS.map(({ href, label, icon: Icon }) => {

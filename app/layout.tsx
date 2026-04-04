@@ -46,7 +46,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en" className={`${dmSerif.variable} ${inter.variable} h-full`}>
       <body className="min-h-full bg-cream text-navy font-body">
         <SessionProvider session={session}>
-          <main style={{ paddingBottom: 'calc(5rem + env(safe-area-inset-bottom, 20px))' }}>
+          <main className="pb-safe">
             {children}
           </main>
           <BottomNav />
