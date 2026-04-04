@@ -19,7 +19,7 @@ export default function CookieConsent() {
   if (!visible) return null
 
   return (
-    <div className="fixed bottom-20 left-4 right-4 z-50 max-w-sm mx-auto">
+    <div className="fixed bottom-24 left-4 right-4 z-50 max-w-sm mx-auto">
       <div className="bg-navy text-cream rounded-2xl p-4 shadow-warm-lg border border-navy/20" style={{ backdropFilter: 'none', opacity: 1 }}>
         <p className="text-sm leading-relaxed mb-3">
           We use essential cookies only — no tracking, no analytics.{' '}

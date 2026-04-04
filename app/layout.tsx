@@ -44,9 +44,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en" className={`${dmSerif.variable} ${inter.variable} h-full`}>
-      <body className="min-h-full bg-cream text-navy font-body">
+      <body className="bg-cream text-navy font-body flex flex-col" style={{ height: '100dvh', overflow: 'hidden' }}>
         <SessionProvider session={session}>
-          <main className="pb-safe">
+          <main className="flex-1 overflow-y-auto pb-4" style={{ WebkitOverflowScrolling: 'touch' } as React.CSSProperties}>
             {children}
           </main>
           <BottomNav />
