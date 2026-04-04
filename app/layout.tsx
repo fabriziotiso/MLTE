@@ -36,6 +36,7 @@ export const viewport: Viewport = {
   maximumScale: 1,
   userScalable: false,
   themeColor: '#FFFBF5',
+  viewportFit: 'cover',
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -45,7 +46,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en" className={`${dmSerif.variable} ${inter.variable} h-full`}>
       <body className="min-h-full bg-cream text-navy font-body">
         <SessionProvider session={session}>
-          <main className="pb-24">
+          <main style={{ paddingBottom: 'calc(4rem + env(safe-area-inset-bottom, 0px))' }}>
             {children}
           </main>
           <BottomNav />
