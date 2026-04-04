@@ -50,10 +50,11 @@ export default function CategoryGrid() {
 
               {/* Content */}
               <div className="absolute inset-0 flex flex-col justify-end p-3">
-                <span className="text-2xl mb-1">{meta.icon}</span>
-                <span className="font-heading text-cream text-base font-medium leading-tight">
-                  {meta.label}
-                </span>
+                <div className="bg-navy/80 rounded-xl px-3 py-2 backdrop-blur-sm inline-block">
+                  <span className="font-heading text-cream text-base font-medium leading-tight">
+                    {meta.label}
+                  </span>
+                </div>
               </div>
             </Link>
           )
