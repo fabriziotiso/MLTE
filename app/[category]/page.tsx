@@ -33,6 +33,7 @@ interface PageParams {
     travelerTag?: string | string[]
     priceRange?: string
     neighborhood?: string
+    cuisineType?: string
     search?: string
   }>
 }
@@ -62,6 +63,7 @@ export default async function CategoryPage({ params, searchParams }: PageParams)
   if (travelerTags.length > 0) where.travelerTags = { hasSome: travelerTags }
   if (sp.priceRange) where.priceRange = sp.priceRange
   if (sp.neighborhood) where.neighborhood = sp.neighborhood
+  if (sp.cuisineType) where.extraFields = { path: ['cuisine_type'], equals: sp.cuisineType }
   if (sp.search) {
     where.OR = [
       { name: { contains: sp.search, mode: 'insensitive' } },
@@ -69,9 +71,9 @@ export default async function CategoryPage({ params, searchParams }: PageParams)
     ]
   }
 
-  const hasFilters = !!(travelerTags.length || sp.priceRange || sp.neighborhood || sp.search)
+  const hasFilters = !!(travelerTags.length || sp.priceRange || sp.neighborhood || sp.cuisineType || sp.search)
 
-  const [items, intro, neighborhoods] = await Promise.all([
+  const [items, intro, neighborhoods, cuisineTypes] = await Promise.all([
     prisma.recommendation.findMany({
       where,
       orderBy: [{ sortOrder: 'asc' }, { createdAt: 'desc' }],
@@ -89,6 +91,19 @@ export default async function CategoryPage({ params, searchParams }: PageParams)
       distinct: ['neighborhood'],
       orderBy: { neighborhood: 'asc' },
     }).then(res => res.map(r => r.neighborhood).filter((n): n is string => n !== null)).catch(() => []),
+    dbCategory === 'restaurant'
+      ? prisma.recommendation.findMany({
+          where: { category: 'restaurant', active: true },
+          select: { extraFields: true },
+        }).then(rows => {
+          const set = new Set<string>()
+          for (const row of rows) {
+            const ef = row.extraFields as Record<string, string | null> | null
+            if (ef?.cuisine_type) set.add(ef.cuisine_type)
+          }
+          return [...set].sort()
+        }).catch(() => [])
+      : Promise.resolve([]),
   ])
 
   return (
@@ -134,7 +149,11 @@ export default async function CategoryPage({ params, searchParams }: PageParams)
 
       {/* Sticky filter bar */}
       <Suspense>
-        <FilterBar neighborhoods={neighborhoods} />
+        <FilterBar
+          category={dbCategory}
+          neighborhoods={neighborhoods}
+          cuisineTypes={cuisineTypes}
+        />
       </Suspense>
 
       {/* Results */}

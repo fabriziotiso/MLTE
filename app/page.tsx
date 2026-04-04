@@ -37,27 +37,23 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen bg-cream">
-      {/* Hero — illustration + wordmark */}
-      <div className="bg-cream px-6 pt-10 pb-0" style={{ paddingTop: 'max(2.5rem, env(safe-area-inset-top))' }}>
-        <div className="flex items-center gap-6">
-          <div className="flex-shrink-0">
-            <Image
-              src="/images/generated-1775333470233.png"
-              alt="MLTE illustration"
-              width={110}
-              height={100}
-              className="object-contain"
-              priority
-            />
-          </div>
-          <div className="flex flex-col gap-0.5 pt-3">
-            <p className="text-[26px] font-bold text-navy leading-tight tracking-[1px]">
-              MARBELLA LIFE
-            </p>
-            <p className="text-[12px] font-semibold text-terra tracking-[3px] uppercase">
-              TOUR EXPERIENCE
-            </p>
-          </div>
+      {/* Hero — illustration + wordmark (vertical centered stack) */}
+      <div className="bg-cream px-6 pb-7 flex flex-col items-center" style={{ paddingTop: 'max(2.25rem, env(safe-area-inset-top))' }}>
+        <Image
+          src="/images/generated-1775333470233.png"
+          alt="MLTE illustration"
+          width={220}
+          height={200}
+          className="object-contain"
+          priority
+        />
+        <div className="flex flex-col items-center gap-[2px] pt-3">
+          <p className="text-[26px] font-bold text-navy leading-tight tracking-[1px]">
+            MARBELLA LIFE
+          </p>
+          <p className="text-[12px] font-semibold text-terra tracking-[3px] uppercase">
+            TOUR EXPERIENCE
+          </p>
         </div>
       </div>
 
