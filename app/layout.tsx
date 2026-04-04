@@ -45,7 +45,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en" className={`${dmSerif.variable} ${inter.variable} h-full`}>
       <body className="min-h-full bg-cream text-navy font-body">
         <SessionProvider session={session}>
-          <main className="pb-20">
+          <main className="pb-24">
             {children}
           </main>
           <BottomNav />

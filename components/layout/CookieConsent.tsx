@@ -20,7 +20,7 @@ export default function CookieConsent() {
 
   return (
     <div className="fixed bottom-20 left-4 right-4 z-50 max-w-sm mx-auto">
-      <div className="bg-navy text-cream rounded-2xl p-4 shadow-warm-lg">
+      <div className="bg-navy text-cream rounded-2xl p-4 shadow-warm-lg border border-navy/20" style={{ backdropFilter: 'none', opacity: 1 }}>
         <p className="text-sm leading-relaxed mb-3">
           We use essential cookies only — no tracking, no analytics.{' '}
           <Link href="/privacy" className="underline underline-offset-2 text-terra-light">

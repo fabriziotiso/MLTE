@@ -46,9 +46,6 @@ export default async function HomePage() {
         <h1 className="font-heading text-cream text-4xl leading-tight mb-2">
           Your Curated<br />Marbella Guide
         </h1>
-        <p className="text-cream/70 text-sm leading-relaxed max-w-xs">
-          Hand-picked by the CEO — the places locals actually love.
-        </p>
       </div>
 
       {/* Wave separator */}
