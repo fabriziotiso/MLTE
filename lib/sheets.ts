@@ -84,9 +84,9 @@ function parseBool(val: string): boolean {
 // Convert Google Drive share/view URLs to direct image URLs
 function toDirectImageUrl(url: string): string {
   if (!url) return url
-  // https://drive.google.com/file/d/FILE_ID/view?... → https://lh3.googleusercontent.com/d/FILE_ID
+  // https://drive.google.com/file/d/FILE_ID/view?... → https://drive.google.com/uc?export=view&id=FILE_ID
   const match = url.match(/drive\.google\.com\/file\/d\/([^/]+)/)
-  if (match) return `https://lh3.googleusercontent.com/d/${match[1]}`
+  if (match) return `https://drive.google.com/uc?export=view&id=${match[1]}`
   return url
 }
 
