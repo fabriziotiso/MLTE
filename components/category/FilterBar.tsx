@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
-import { ChevronDown, X } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { PRICE_RANGES, TRAVELER_TAGS } from '@/lib/types'
 
 interface FilterBarProps {
@@ -108,8 +108,7 @@ export default function FilterBar({ category, neighborhoods, cuisineTypes = [] }
     router.replace(`${pathname}?${params.toString()}`, { scroll: false })
   }
 
-  function clearFilter(key: FilterKey, e: React.MouseEvent) {
-    e.stopPropagation()
+  function clearFilter(key: FilterKey) {
     const params = new URLSearchParams(searchParams.toString())
     params.delete(key)
     router.replace(`${pathname}?${params.toString()}`, { scroll: false })
@@ -141,25 +140,25 @@ export default function FilterBar({ category, neighborhoods, cuisineTypes = [] }
             <div key={filter.key} className="relative flex-shrink-0">
               <button
                 onClick={() => setOpenKey(isOpen ? null : filter.key)}
-                className={`flex items-center gap-[6px] h-9 px-[14px] rounded-[18px] text-[13px] font-medium transition-all border ${
-                  active
-                    ? 'bg-navy text-white border-navy'
-                    : 'bg-white text-navy border-[#E0DDD8]'
-                }`}
+                className="flex items-center gap-[6px] h-9 px-[14px] rounded-[18px] text-[13px] font-medium transition-all border bg-white text-navy border-[#E0DDD8]"
               >
                 <span>{label}</span>
-                {active ? (
-                  <X size={12} onClick={(e) => clearFilter(filter.key, e)} />
-                ) : (
-                  <ChevronDown
-                    size={14}
-                    className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-                  />
-                )}
+                <ChevronDown
+                  size={14}
+                  className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                />
               </button>
 
               {isOpen && filter.options.length > 0 && (
                 <div className="absolute top-full left-0 mt-1.5 bg-white rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.12)] border border-[#E8E4DE] z-50 min-w-[160px] max-h-[240px] overflow-y-auto py-1">
+                  {active && (
+                    <button
+                      onClick={() => clearFilter(filter.key)}
+                      className="w-full text-left px-4 py-2.5 text-[13px] text-navy font-semibold hover:bg-[#F5F4F2] transition-colors"
+                    >
+                      All
+                    </button>
+                  )}
                   {filter.options.map(option => {
                     const selected = currentValues.includes(option)
                     return (
@@ -190,10 +189,9 @@ export default function FilterBar({ category, neighborhoods, cuisineTypes = [] }
               filters.forEach(f => params.delete(f.key))
               router.replace(`${pathname}?${params.toString()}`, { scroll: false })
             }}
-            className="flex-shrink-0 flex items-center gap-1 text-[12px] text-terra hover:text-terra-dark transition-colors px-1"
+            className="flex-shrink-0 text-[12px] text-[#888888] hover:text-navy transition-colors"
           >
-            <X size={11} />
-            Clear
+            Clear all
           </button>
         )}
       </div>

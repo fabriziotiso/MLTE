@@ -34,6 +34,11 @@ export default function SeasonalCard({ item }: SeasonalCardProps) {
 
       {/* Text area — white bottom */}
       <div className="flex flex-col gap-[3px] px-3 py-[10px] flex-1">
+        {meta && (
+          <p className="text-[9px] font-bold text-[#FF8C42] tracking-[1.5px]">
+            {meta.label.toUpperCase()}
+          </p>
+        )}
         <h3 className="text-[14px] font-bold text-navy leading-snug line-clamp-2">
           {item.name}
         </h3>

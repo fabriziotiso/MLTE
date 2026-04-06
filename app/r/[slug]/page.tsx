@@ -9,7 +9,6 @@ import CategoryFields from '@/components/detail/CategoryFields'
 import ShareButton from '@/components/detail/ShareButton'
 import FavoriteButton from '@/components/favorites/FavoriteButton'
 import Image from 'next/image'
-import { MapPin } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
 
@@ -101,20 +100,6 @@ export default async function DetailPage({ params }: PageProps) {
           </div>
         )}
 
-        {/* Map link */}
-        {(item.googleMapsUrl || item.address) && (
-          <div className="px-4 pt-2 pb-5">
-            <a
-              href={item.googleMapsUrl ?? `https://maps.google.com/?q=${encodeURIComponent(item.address ?? '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-1.5 py-4 text-terra font-semibold text-[13px] hover:opacity-80 transition-opacity"
-            >
-              <MapPin size={14} className="text-terra" />
-              Open in Google Maps
-            </a>
-          </div>
-        )}
       </div>
     </div>
   )
