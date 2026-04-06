@@ -121,8 +121,6 @@ export default function FilterBar({ category, neighborhoods, cuisineTypes = [] }
     f.key === 'priceRange' || f.key === 'travelerTag' || f.options.length > 0
   )
 
-  const anyActive = filters.some(f => isActive(f.key))
-
   if (filters.length === 0) return null
 
   return (
@@ -182,18 +180,6 @@ export default function FilterBar({ category, neighborhoods, cuisineTypes = [] }
           )
         })}
 
-        {anyActive && (
-          <button
-            onClick={() => {
-              const params = new URLSearchParams(searchParams.toString())
-              filters.forEach(f => params.delete(f.key))
-              router.replace(`${pathname}?${params.toString()}`, { scroll: false })
-            }}
-            className="flex-shrink-0 text-[12px] text-[#888888] hover:text-navy transition-colors"
-          >
-            Clear all
-          </button>
-        )}
       </div>
     </div>
   )
