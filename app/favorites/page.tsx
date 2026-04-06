@@ -36,10 +36,10 @@ export default async function FavoritesPage() {
 
   return (
     <div className="min-h-screen bg-cream">
-      <div className="bg-cream px-5 pb-5" style={{ paddingTop: 'max(1.25rem, env(safe-area-inset-top))' }}>
+      <div className="bg-cream px-5 lg:px-12 pb-5 lg:pb-8" style={{ paddingTop: 'max(1.25rem, env(safe-area-inset-top))' }}>
         <div className="flex items-center gap-3">
           <Heart size={28} className="text-navy" fill="currentColor" />
-          <h1 className="text-[24px] font-bold text-navy">Saved Places</h1>
+          <h1 className="text-[24px] lg:text-[28px] font-bold text-navy">Saved Places</h1>
         </div>
         <p className="text-[#888888] text-[13px] mt-0.5">{items.length} saved</p>
       </div>
@@ -60,7 +60,7 @@ export default async function FavoritesPage() {
             </Link>
           </div>
         ) : (
-          <div className="px-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="px-4 lg:px-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {items.map(item => (
               <RecommendationCard key={item.id} item={item} />
             ))}

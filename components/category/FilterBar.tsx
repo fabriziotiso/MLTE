@@ -125,7 +125,7 @@ export default function FilterBar({ category, neighborhoods, cuisineTypes = [] }
 
   return (
     <div ref={barRef} className="sticky top-0 z-30 bg-cream/95 backdrop-blur-md border-b border-[#ECEAE4]">
-      <div className="flex items-center gap-[10px] px-4 py-3">
+      <div className="flex items-center gap-[10px] px-4 lg:px-12 py-3">
         {filters.map(filter => {
           const active = isActive(filter.key)
           const label = getDisplayLabel(filter)

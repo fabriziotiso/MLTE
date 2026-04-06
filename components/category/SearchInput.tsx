@@ -4,7 +4,7 @@ import { useState, useTransition } from 'react'
 import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import { Search, X } from 'lucide-react'
 
-export default function SearchInput() {
+export default function SearchInput({ className }: { className?: string }) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -35,7 +35,7 @@ export default function SearchInput() {
   }
 
   return (
-    <div className="relative mx-4 mb-3">
+    <div className={`relative mx-4 mb-3 ${className ?? ''}`}>
       <Search
         size={16}
         className="absolute left-4 top-1/2 -translate-y-1/2 text-[#AAAAAA] pointer-events-none"

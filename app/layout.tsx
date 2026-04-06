@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import BottomNav from '@/components/layout/BottomNav'
+import Sidebar from '@/components/layout/Sidebar'
 import CookieConsent from '@/components/layout/CookieConsent'
 import SessionProvider from '@/components/auth/SessionProvider'
 import { auth } from '@/lib/auth'
@@ -39,12 +40,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en" className={`${inter.variable} h-full`}>
-      <body className="bg-cream text-navy font-body flex flex-col" style={{ height: '100dvh', overflow: 'hidden' }}>
+      <body className="bg-cream text-navy font-body flex" style={{ height: '100dvh', overflow: 'hidden' }}>
         <SessionProvider session={session}>
-          <main className="flex-1 overflow-y-auto pb-4" style={{ WebkitOverflowScrolling: 'touch' } as React.CSSProperties}>
-            {children}
-          </main>
-          <BottomNav />
+          <Sidebar />
+          <div className="flex flex-col flex-1 min-w-0">
+            <main className="flex-1 overflow-y-auto pb-4" style={{ WebkitOverflowScrolling: 'touch' } as React.CSSProperties}>
+              {children}
+            </main>
+            <BottomNav />
+          </div>
           <CookieConsent />
         </SessionProvider>
       </body>

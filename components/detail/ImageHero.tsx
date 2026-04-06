@@ -13,7 +13,7 @@ export default function ImageHero({ item, backHref }: ImageHeroProps) {
   const meta = CATEGORY_META[item.category]
 
   return (
-    <div className="relative w-full h-[300px] bg-sand overflow-hidden">
+    <div className="relative w-full h-[300px] lg:h-[420px] bg-sand overflow-hidden">
       {item.imageUrl ? (
         <Image
           src={item.imageUrl}
@@ -43,11 +43,11 @@ export default function ImageHero({ item, backHref }: ImageHeroProps) {
       </div>
 
       {/* Title overlay */}
-      <div className="absolute bottom-0 left-0 right-0 px-4 pb-5">
-        <p className="text-[11px] text-white/80 mb-1">
+      <div className="absolute bottom-0 left-0 right-0 px-4 lg:px-12 pb-5 lg:pb-8">
+        <p className="text-[11px] lg:text-[12px] text-white/80 mb-1">
           {meta?.label ?? item.category}
         </p>
-        <h1 className="text-[26px] font-bold text-white leading-[1.1]">
+        <h1 className="text-[26px] lg:text-[42px] font-bold text-white leading-[1.1]">
           {item.name}
         </h1>
         {item.neighborhood && (

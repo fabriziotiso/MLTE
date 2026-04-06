@@ -15,7 +15,7 @@ export default function BottomNav() {
 
   return (
     <nav
-      className="bg-white border-t border-sand shrink-0"
+      className="lg:hidden bg-white border-t border-sand shrink-0"
       style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
     >
       <div className="flex items-center justify-around h-[72px] max-w-lg mx-auto px-8">

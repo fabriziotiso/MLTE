@@ -8,7 +8,7 @@ import FilterBar from '@/components/category/FilterBar'
 import SearchInput from '@/components/category/SearchInput'
 import RecommendationGrid from '@/components/category/RecommendationGrid'
 import {
-  ChevronLeft, UtensilsCrossed, Wine, Building2, Music2,
+  ChevronLeft, ChevronRight, UtensilsCrossed, Wine, Building2, Music2,
   Sailboat, Landmark, FerrisWheel, Waves,
 } from 'lucide-react'
 import Link from 'next/link'
@@ -108,29 +108,44 @@ export default async function CategoryPage({ params, searchParams }: PageParams)
 
   return (
     <div className="min-h-screen bg-cream">
-      {/* Category header — light background */}
-      <div className="bg-cream px-5" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
-        {/* Back button row */}
+      {/* Desktop breadcrumb topbar */}
+      <div className="hidden lg:flex items-center gap-2 h-[52px] px-12 bg-white border-b border-[#ECEAE4]">
+        <Link href="/" className="flex items-center gap-1.5 text-[#888888] hover:text-navy transition-colors text-[13px]">
+          <ChevronLeft size={16} className="text-navy" />
+          Home
+        </Link>
+        <ChevronRight size={14} className="text-[#CCCCCC]" />
+        <span className="text-[13px] font-semibold text-navy">{meta.label}</span>
+      </div>
+
+      {/* Mobile header */}
+      <div className="lg:hidden bg-cream px-5" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
         <div className="flex items-center gap-1.5 h-[50px]">
-          <Link
-            href="/"
-            className="flex items-center gap-1.5 text-navy hover:text-navy/70 transition-colors"
-          >
+          <Link href="/" className="flex items-center gap-1.5 text-navy hover:text-navy/70 transition-colors">
             <ChevronLeft size={20} strokeWidth={2} />
             <span className="text-[14px] text-navy">Home</span>
           </Link>
         </div>
-
-        {/* Title row */}
         <div className="flex items-center gap-3 pb-5">
           <CategoryIcon size={32} className="text-navy flex-shrink-0" strokeWidth={1.75} />
           <div className="flex flex-col gap-0.5">
             <h1 className="text-[24px] font-bold text-navy leading-none">{meta.label}</h1>
-            <p className="text-[13px] text-[#888888]">
-              {items.length} place{items.length !== 1 ? 's' : ''}
-            </p>
+            <p className="text-[13px] text-[#888888]">{items.length} place{items.length !== 1 ? 's' : ''}</p>
           </div>
         </div>
+      </div>
+
+      {/* Desktop header: icon + title + search inline */}
+      <div className="hidden lg:flex items-center gap-4 px-12 py-5">
+        <CategoryIcon size={32} className="text-navy flex-shrink-0" strokeWidth={1.75} />
+        <div className="flex flex-col gap-0.5">
+          <h1 className="text-[26px] font-bold text-navy leading-none">{meta.label}</h1>
+          <p className="text-[14px] text-[#888888]">{items.length} place{items.length !== 1 ? 's' : ''}</p>
+        </div>
+        <div className="flex-1" />
+        <Suspense>
+          <SearchInput className="w-[320px]" />
+        </Suspense>
       </div>
 
       {/* CEO Intro */}
@@ -140,8 +155,8 @@ export default async function CategoryPage({ params, searchParams }: PageParams)
         </div>
       )}
 
-      {/* Search */}
-      <div className="pt-4">
+      {/* Search — mobile only */}
+      <div className="lg:hidden pt-4">
         <Suspense>
           <SearchInput />
         </Suspense>

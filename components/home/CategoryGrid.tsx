@@ -17,12 +17,12 @@ export default function CategoryGrid() {
   const categories = Object.entries(CATEGORY_META)
 
   return (
-    <section className="px-5 pt-2">
-      <h2 className="text-base font-bold text-navy mb-3">
+    <section className="px-5 lg:px-12 pt-2">
+      <h2 className="text-base lg:text-[18px] font-bold text-navy mb-3">
         Explore Marbella
       </h2>
 
-      <div className="grid grid-cols-2 gap-[10px]">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-[10px] lg:gap-3">
         {categories.map(([slug, meta]) => {
           const pathSlug = CATEGORY_TO_PATH[slug] ?? slug
           const imgSrc = CATEGORY_IMAGES[slug]
